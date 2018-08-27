@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: red;
+        }
+        .box:nth-child(1){
+            position: absolute;
+            top:20px;
+        }
+        .box:nth-child(2){
+            position: absolute;
+            top:130px;
+        }
+        .box:nth-child(3){
+            position: absolute;
+            top:240px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+</body>
+<script>
+
+let box = document.querySelectorAll('.box')
+
+function move(ele,distance){
+    return new Promise((resolve,reject)=>{
+        let movex = 0;
+        let timer = setInterval(function(){
+            movex++;
+            ele.style.left = movex + 'px'
+            if(movex >= distance){
+                resolve();
+                clearInterval(timer)
+            }
+        })
+    },6)
+}
+
+async function Move(){
+    await move(box[0],500)
+    await move(box[1],400)
+    await move(box[2],300)
+}
+Move().then(data=>{
+    alert('finished')
+})
+//3.generator
+// function* Move(){
+//     yield move(box[0],500);
+//     yield move(box[1],400);
+//     yield move(box[2],300);
+
+// }
+// function co(it){
+//     return new Promise((resolve,reject)=>{
+//         function next(data){
+//             let {value,done} = it.next(data);
+//             if(!done){
+//                 value.then(data=>{
+//                     next(data);
+//                 },reject)
+//             }else{
+//                 resolve(value)
+//             }
+//         }
+//         next()
+//     })
+// }
+// co(Move()).then(data=>{
+//     alert('finished')
+// })
+//2.promise
+// move(box[0],500).then(data=>{
+//     return move(box[1],400)
+// }).then(data=>{
+//     move(box[2],300)
+// })
+    //1.
+    // function move(ele,range,callback){
+        
+    //     let movex = 0;
+    // let timer = setInterval(function(){
+    //     movex++;
+    //     ele.style.left = movex + 'px';
+
+    //     if(movex >= range){
+    //         callback()
+    //         clearInterval(timer)
+    //     }
+    // },6)
+    // }
+
+
+    // move(box[0],500,function(){
+    //     move(box[1],400,function(){
+    //         move(box[2],300,function(){
+    //             alert('第三个结束')
+    //         })
+    //     })
+    // })
+
+let [a,b] = [1,2]
+console.log(a,b)
+    
+</script>
+</html>

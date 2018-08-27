@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="target">
+        text1
+        <p><span>spanneirong</span></p>
+    </div>
+    <script>
+        console.log('1')
+
+
+        let target = document.getElementById('target');
+        let observe = new MutationObserver(function(){
+            console.log('dom操作完成')
+        })
+        observe.observe(target,{childList:true})
+        while(true){
+            target.appendChild(document.createTextNode('新增节点'))
+
+        }
+
+
+        Promise.resolve('ok').then((data)=>{
+                console.log('no')
+        })
+       
+
+
+        console.log('2')
+
+
+        //     console.log(1)
+
+        // let channel = new MessageChannel();
+        // let port1 = channel.port1;
+        // let port2 = channel.port2;
+        // port1.postMessage('hello');
+        // port2.onmessage = function(e){
+        //     for(let i = 0; i < 10; i++){
+        //         console.log(i)
+        //     }
+        // }
+
+        // setTimeout(()=>{
+        //     console.log(2)
+        // },50)
+
+        // setTimeout(()=>{
+        //     console.log(3)
+        // })
+        // console.log(5)
+    </script>
+</body>
+</html>
